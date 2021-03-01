@@ -15,9 +15,26 @@
     // 💰 The example in the markdown file should be a good hint for you.
     
     // Props: Propriedades de um elemento
-    const reactElement = React.createElement('div', {
+    /* const reactElement = React.createElement('div', {
         className: 'container',
         children: 'Hello, world! da Samara'
+    })
+    ReactDOM.render(reactElement, rootElement)*/
+
+    // A propriedade children de um componente React
+    // pode conter outros elementos React
+    // Parâmetros do método React.createElement():
+    // 1º: o tipo de elemento que será criado
+    // 2º: um objeto representando as props do objeto
+    // 3º: o conteúdo interno (coldren em textContent) do elemento (opcional)
+    const reactElement = React.createElement('div', {
+        className: 'container',
+        children: [
+            // O resultado final dos React.createElement() abaixo é semelhante
+            React.createElement('span', null, 'Hello'),
+            '  ',
+            React.createElement('span', {children: 'world'})
+        ]
     })
     ReactDOM.render(reactElement, rootElement)
 
