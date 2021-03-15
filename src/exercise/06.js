@@ -24,13 +24,24 @@ function UsernameForm({onSubmitUsername}) {
     o estado
   */
   let [error, setError] = React.useState('')
+  let [username, setUsername] = React.useState('')
+
+  // Funçao chamada sempre que ha uma alteraçao no valor do input
   function handleChange(event) {
-    const username = event.target.value
+    const inputVal = event.target.value // Captura o conteudo do input
+
+    // Converter o conteudo do input para minusculas e armazenar na
+    // variavel de estado
+    setUsername(inputVal.toLowerCase())
+
+
+    /*
     // Validação: será que o usuário escreveu o username totalmente em minúsculas?
     if (username.toLowerCase() !== username) {
       setError('O username deve ser informado totalmente em minúsculas!')
     }
     else setError('')
+    */
   }
 
   function handleSubmit(event) {
@@ -69,7 +80,7 @@ function UsernameForm({onSubmitUsername}) {
             a label for="username">
           */}
         <label htmlFor="username">Username:</label>
-        <input ref={usernameRef} id="username" type="text" onChange={handleChange} />
+        <input ref={usernameRef} id="username" type="text" onChange={handleChange} value={username} />
         <div style={{ color: 'red' }} role="alert">{error}</div>
       </div>
       <button type="submit">Submit</button>
