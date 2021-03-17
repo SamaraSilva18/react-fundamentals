@@ -19,25 +19,46 @@
             Usando os recursos do React (manipuladores de evento, useRef e useState),
             escreva o nome completo da pessoa (EM MAIUSCULAS)
             vez que houver alteracao nos campos de nome ou sobrenome.
-        */
+        
+            1) Criar dois useRef e associa-los aos inputs.
+            2) Criar um useState para armazenar o nome completo.
+            3) Criar uma funçao para manipular o evento onChange dos inputs. Nessa
+                funçao, deve-se ler os valores de ambos os inputs (com as refs), formar
+                o nome completo em maiusculas e guarda-lo na variavel de estado.
+            4) Usar a variavel de estado para utilizar o conteudo da div do nome completo.
 
+            */
+           
         function MeuForm(props) {
-            return (
-            <form>
-                <div>
-                    <label htmlFor="nome">Nome</label>
-                    <input id="nome"/>
-                </div>
-                <div>
-                    <label htmlFor="sobrenome">Nome</label>
-                    <input id="sobrenome"/>
-                </div>
-                <div id="nomeCompleto"></div>
-            </form>
-            )
-        }
+            
+            const nomeRef = React.useRef()
+            const sobrenomeRef = React.useRef()
 
-    ReactDom.render(<MeuForm />, document.getElementById('root'))
+            const [nomeCompleto, setNomeCompleto] = React.useState('')
+
+            function handleChange(event) {
+                const nom = nomeRef.current.value
+                const som = sobrenomeRef.current.value
+
+                setNomeCompleto(nom.toUpperCase() + ' ' + som.toUpperCase())
+            }
+            
+            return (
+                <form>
+                 <div>
+                    <label htmlFor="nome">Nome</label>
+                    <input ref={nomeRef} id="nome" onChange={handleChange}/>
+                </div>
+                <div>
+                    <label htmlFor="sobrenome">Sobrenome</label>
+                    <input ref={sobrenomeRef} id="sobrenome" onChange={handleChange} />
+                </div>
+                <div id="nomeCompleto">{nomeCompleto}</div>         
+                </form>
+            )
+    }
+
+    ReactDOM.render(<MeuForm />, document.getElementById('root'))
 
 </script>
 </body>
